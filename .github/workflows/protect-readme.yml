@@ -1,0 +1,16 @@
+name: Protect README from others
+
+on:
+  push:
+    paths:
+      - 'README.md'
+
+jobs:
+  block-if-not-owner:
+    runs-on: ubuntu-latest
+    if: github.actor != 'aryaakshirsagar'
+    steps:
+      - name: Block README.md edits by others
+        run: |
+          echo "Only aryaakshirsagar can edit README.md."
+          exit 1
